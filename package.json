@@ -1,0 +1,19 @@
+{
+  "name": "password-generator",
+  "version": "0.0.1",
+  "description": "Simple password generator",
+  "author": "nionoku <nionoku@gmail.com>",
+  "scripts": {
+    "serve": "gulp serve",
+    "build": "gulp build",
+    "test": "mocha tests/**/*.js"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.5",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-sass": "^4.0.2",
+    "mocha": "^6.1.4"
+  }
+}

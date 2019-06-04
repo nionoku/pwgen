@@ -21,6 +21,13 @@ describe("PasswordGenerator testing", () => {
         })
     })
 
+    describe("getMaxLengthOfStrings testing", () => {
+        it("Check correctly getMaxLengthOfStrings", (done) => {
+            Chai.assert.equal(passwordGenerator.getMaxLengthOfStrings(site, username, salt), salt.length)
+            done()
+        })
+    })
+
     describe("stringFromCharDecompos testing", () => {
         it("Length of stringFromCharDecompos", (done) => {
             Chai.assert.equal(passwordGenerator.stringFromCharDecompos(site, username, salt).length, 3)

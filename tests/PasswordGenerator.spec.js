@@ -30,13 +30,24 @@ describe("PasswordGenerator testing", () => {
 
     describe("stringFromCharDecompos testing", () => {
         it("Length of stringFromCharDecompos", (done) => {
-            Chai.assert.equal(passwordGenerator.stringFromCharDecompos(site, username, salt).length, 3)
+            Chai.assert.equal(
+                passwordGenerator.stringFromCharDecompos(site, username, salt).length, 
+                site.length + username.length + salt.length
+            )
             done()
         })
 
         it ("Check correctly stringFromCharDecompos", (done) => {
-            Chai.assert.equal(passwordGenerator.stringFromCharDecompos(site, username, salt), "any")
-            // Chai.assert.deepEqual(passwordGenerator.getArrayOfSplitStrings(username), [ username.split('') ])
+            const stringFromCharDecompos = passwordGenerator.stringFromCharDecompos(site, username, salt)
+            Chai.assert.equal(stringFromCharDecompos.substring(0, 3), site[0] + username[0] + salt[0])
+            done()
+        })
+    })
+
+    describe("getStringHashing testing", () => {
+        it("Check correctly getStringHashing", (done) => {
+            const stringFromCharDecompos = passwordGenerator.stringFromCharDecompos(site, username, salt)
+            Chai.assert.equal(passwordGenerator.getStringHashing(stringFromCharDecompos), "58a7ea7265771bc7f808129025e00883")
             done()
         })
     })

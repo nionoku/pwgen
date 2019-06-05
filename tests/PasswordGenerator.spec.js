@@ -1,8 +1,7 @@
 const Chai = require('chai')
+const PasswordGenerator = require("../src/scripts/PasswordGenerator")
 
 describe("PasswordGenerator testing", () => {
-    const PasswordGenerator = require("../src/scripts/PasswordGenerator")
-
     const site = "http://google.com"
     const username = "any-username"
     const salt = "Any memorable string"
@@ -48,6 +47,39 @@ describe("PasswordGenerator testing", () => {
         it("Check correctly getStringHashing", (done) => {
             const stringFromCharDecompos = passwordGenerator.stringFromCharDecompos(site, username, salt)
             Chai.assert.equal(passwordGenerator.getStringHashing(stringFromCharDecompos), "58a7ea7265771bc7f808129025e00883")
+            done()
+        })
+    })
+
+    describe("hashShorter testing", () => {
+        it("Check correctly hashShorter", (done) => {
+            const stringFromCharDecompos = passwordGenerator.stringFromCharDecompos(site, username, salt)
+            const stringHash = passwordGenerator.getStringHashing(stringFromCharDecompos)
+            Chai.assert.equal(passwordGenerator.hashShorter(stringHash, 16), stringHash.substr(8, 16))
+            done()
+        })
+
+        it("Check odd lenght in hashShorter", (done) => {
+            const stringFromCharDecompos = passwordGenerator.stringFromCharDecompos(site, username, salt)
+            const stringHash = passwordGenerator.getStringHashing(stringFromCharDecompos)
+
+            Chai.assert.throws(() => {
+                passwordGenerator.hashShorter(stringHash, 15), stringHash.substr(8, 16)
+            }, "length odd number")
+            done()
+        })
+
+        it("Check max lenght in hashShorter", (done) => {
+            const stringFromCharDecompos = passwordGenerator.stringFromCharDecompos(site, username, salt)
+            const stringHash = passwordGenerator.getStringHashing(stringFromCharDecompos)
+
+            Chai.assert.throws(() => {
+                passwordGenerator.hashShorter(stringHash, -2), stringHash.substr(8, 16)
+            }, "length < 0 or > max length")
+
+            Chai.assert.throws(() => {
+                passwordGenerator.hashShorter(stringHash, stringHash.length), stringHash.substr(8, 16)
+            }, "length < 0 or > max length")
             done()
         })
     })

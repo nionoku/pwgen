@@ -1,52 +1,80 @@
 const gulp = require('gulp'),
     scss = require('gulp-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
+    prefixer = require('gulp-autoprefixer'),
     bs = require('browser-sync').create()
 
 const paths = {
+    assets: {
+        src: "src/assets/**/*.*",
+        dest: "dist/assets"
+    },
+
     styles: {
-        src: "src/styles/*.scss",
+        src: "src/styles/**/*.scss",
         dest: "dist/css"
     },
 
     scripts: {
-        src: "src/scripts/*.js",
+        src: "src/scripts/**/*.js",
         dest: "dist/js"
     },
 
-    markup: {
-        src: "src/*.html",
+    pages: {
+        src: "src/pages/*.html",
+        dest: "dist/pages"
+    },
+
+    index: {
+        src: "src/index.html",
         dest: "dist"
     }
 }
 
-function markup() {
-    return gulp
-        .src(paths.markup.src)
-        .pipe(gulp.dest(paths.markup.dest))
-} 
+function makeMarkup() {
+    makePages()
+    makeIndexPage()
+}
 
-function script() {
+function makePages() {
+    return gulp
+        .src(paths.pages.src)
+        .pipe(gulp.dest(paths.pages.dest))
+}
+
+function makeIndexPage() {
+    return gulp
+        .src(paths.index.src)
+        .pipe(gulp.dest(paths.index.dest))
+}
+
+function makeAssets() {
+    return gulp
+        .src(paths.assets.src)
+        .pipe(gulp.dest(paths.assets.dest))
+}
+
+function makeScript() {
     return gulp
         .src(paths.scripts.src)
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(bs.stream())
 }
 
-function style() {
+function makeStyle() {
     return gulp
         .src(paths.styles.src)
         .pipe(scss())
-        .pipe(autoprefixer())
+        .pipe(prefixer())
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(bs.stream())
 }
 
 function build() {
     return new Promise((resolve) => {
-        style()
-        script()
-        markup()
+        makeStyle()
+        makeScript()
+        makeMarkup()
+        makeAssets()
         resolve()
     })
 }
@@ -58,10 +86,17 @@ function serve() {
         }
     })
 
-    gulp.watch(paths.styles.src, style)
-    gulp.watch(paths.scripts.src, script)
-    gulp.watch(paths.markup.src, markup).on("change", bs.reload)
+    // watch assets
+    gulp.watch(paths.assets.src, makeAssets)
+    // watch styles
+    gulp.watch(paths.styles.src, makeStyle)
+    // watch scripts
+    gulp.watch(paths.scripts.src, makeScript)
+    // watch pages
+    gulp.watch([ paths.pages.src, paths.index.src ], makeMarkup).on("change", bs.reload)
 }
 
+// --- tasks ---
 gulp.task("serve", gulp.series(build, serve))
 gulp.task("build", build)
+// --- tasks ---

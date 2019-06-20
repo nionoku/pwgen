@@ -1,4 +1,4 @@
-const MD5 = require('./MD5')
+const MD5 = require('./lib/MD5')
 
 class PasswordGenerator {
     /**

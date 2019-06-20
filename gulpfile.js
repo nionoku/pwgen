@@ -25,14 +25,9 @@ const paths = {
     },
 
     index: {
-        src: "src/index.html",
+        src: "src/*.html",
         dest: "dist"
     }
-}
-
-function makeMarkup() {
-    makePages()
-    makeIndexPage()
 }
 
 function makePages() {
@@ -69,17 +64,24 @@ function makeStyle() {
         .pipe(bs.stream())
 }
 
-function build() {
-    return new Promise((resolve) => {
-        makeStyle()
-        makeScript()
-        makeMarkup()
-        makeAssets()
-        resolve()
-    })
+function build(done) {
+    makeStyle()
+    makeScript()
+    makeAssets()
+    makePages()
+    makeIndexPage()
+
+    done()
 }
 
-function serve() {
+function reloadServer(done) {
+    if (bs.active)
+        bs.reload()
+
+    done()
+}
+
+function serve(done) {
     bs.init({
         server: {
             baseDir: "dist"
@@ -93,7 +95,11 @@ function serve() {
     // watch scripts
     gulp.watch(paths.scripts.src, makeScript)
     // watch pages
-    gulp.watch([ paths.pages.src, paths.index.src ], makeMarkup).on("change", bs.reload)
+    gulp.watch(paths.pages.src, gulp.series(makePages, reloadServer))
+    // watch index
+    gulp.watch(paths.index.src, gulp.series(makeIndexPage, reloadServer))
+
+    done()
 }
 
 // --- tasks ---

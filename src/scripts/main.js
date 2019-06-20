@@ -5,7 +5,7 @@ const app = new Vue({
             address: '',
             login: '',
             salt: '',
-            generated: 'Your password here',
+            generated: 'GGG',
             hasHidden: true
         }
     },

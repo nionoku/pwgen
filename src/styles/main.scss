@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Raleway:100,300,400,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400&display=swap');
 
 $background: #f1f6fa;
 $gray-50: #FAFAFA;
@@ -71,7 +71,7 @@ body {
         &__card {
             background: white;
             border-radius: 3px;
-            padding: 20px 25px;
+            padding: 20px 25px 15px;
         }
 
         &__title {
@@ -89,6 +89,7 @@ body {
             margin: 20px 15px 5px 15px;
             padding: 9px;
             font-family: 'Roboto';
+            font-weight: 400;
             font-size: 18px;
             color: $gray-800;
             border: 1px solid $gray-500;
@@ -117,15 +118,15 @@ body {
                 text-align: center;
                 font-size: 28px;
                 font-weight: 300;
-                font-family: 'Raleway';
+                font-family: 'Roboto';
             }
 
             .generated-result {
                 margin: 20px 0;
                 text-align: center;
-                font-size: 28px;
+                font-size: 24px;
                 font-weight: 400;
-                font-family: 'Roboto';
+                font-family: 'Roboto Mono';
                 border: 0px solid $gray-500;
                 background: inherit;
                 border-radius: 3px;
@@ -139,6 +140,17 @@ body {
 
             input[type=button] {
                 margin: 5px;
+                padding: 5px;
+                cursor: pointer;
+            }
+        }
+
+        .links {
+            display: flex;
+            justify-content: flex-end;
+
+            .gray-logo {
+                filter: sepia(70%);
             }
         }
     }

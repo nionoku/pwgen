@@ -1,18 +1,23 @@
 const app = new Vue({
     el: "#app",
-    data: {
-        test: "Hello world",
-        address: '',
-        login: '',
-        salt: '',
-        generated: 'Your password here',
-        hasHidden: true
+    data() {
+        return {
+            address: '',
+            login: '',
+            salt: '',
+            generated: 'Your password here',
+            hasHidden: true
+        }
     },
-    computed: {
-        
+    methods: {
+        generatePassword() {
+            // TODO реализовать функцию генерирования пароля
+            // this.generated = [this.address, this.login, this.salt].join(":")
+        }
     }
 })
 
 function copyToClipboard() {
-    console.log("Copied!")
+    // TODO реализовать функцию копирования в буфер обмена
+    // console.log("Copied!")
 }

@@ -55,6 +55,7 @@ body {
 
         .header-title {
             font-size: 42px;
+            margin-top: 0;
             // margin-bottom: 20px;
             color: $gray-900;
         }
@@ -128,7 +129,7 @@ body {
                 border: 0px solid $gray-500;
                 background: inherit;
                 border-radius: 3px;
-                margin: 35px 15px;
+                margin: 25px 15px;
             }
         }
 

@@ -24,21 +24,21 @@
                 <h2 class="content__title address-title">
                     <span class="address-title__index">1.</span> Enter web-site address
                 </h2>
-                <input class="input fill-available-width address-input" type="text" v-model="address"
+                <input class="input fill-available-width address-input" type="text" v-model="address" @input="generatePassword"
                     placeholder="Enter web-site address here in the format 'google.com'">
             </div>
             <div class="content__card login">
                 <h2 class="content__title login-title">
                     <span class="login-title__index">2.</span> Enter your login
                 </h2>
-                <input class="input fill-available-width login-input" type="text" v-model="login"
+                <input class="input fill-available-width login-input" type="text" v-model="login" @input="generatePassword"
                     placeholder="Enter your login here">
             </div>
             <div class="content__card salt">
                 <h2 class="content__title salt-title">
                     <span class="salt-title__index">3.</span> Enter your secret phrase
                 </h2>
-                <input class="input fill-available-width salt-input" type="text" v-model="salt"
+                <input class="input fill-available-width salt-input" type="text" v-model="salt" @input="generatePassword"
                     placeholder="Enter your secret phrase here">
             </div>
             <div class="content__card generated">
@@ -50,6 +50,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- TODO добавить toast notification -->
     </div>
 
     <script src="js/main.js"></script>

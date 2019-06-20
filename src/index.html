@@ -1,19 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="js/lib/MD5.js"></script>
     <link rel="stylesheet" href="css/main.css">
-    <title>Document</title>
+    <title>Generate password on fly! Simple password generator</title>
 </head>
+
 <body>
     <div id="app">
-        {{ test }}
+        <div class="header">
+            <h1 class="header-title">Simple password generator</h1>
+            <h2 class="header-subtitle">
+                Create your password on the fly using the website address, your login and secret phrase!
+            </h2>
+        </div>
+        <div class="content">
+            <div class="content__card address">
+                <h2 class="content__title address-title">
+                    <span class="address-title__index">1.</span> Enter web-site address
+                </h2>
+                <input class="input fill-available-width address-input" type="text" v-model="address"
+                    placeholder="Enter web-site address here in the format 'google.com'">
+            </div>
+            <div class="content__card login">
+                <h2 class="content__title login-title">
+                    <span class="login-title__index">2.</span> Enter your login
+                </h2>
+                <input class="input fill-available-width login-input" type="text" v-model="login"
+                    placeholder="Enter your login here">
+            </div>
+            <div class="content__card salt">
+                <h2 class="content__title salt-title">
+                    <span class="salt-title__index">3.</span> Enter your secret phrase
+                </h2>
+                <input class="input fill-available-width salt-input" type="text" v-model="salt"
+                    placeholder="Enter your secret phrase here">
+            </div>
+            <div class="content__card generated">
+                <h2 class="generated-title">Your generated password</h2>
+                <input class="generated-result fill-available-width" :type="hasHidden ? 'password' : 'text'" disabled v-model="generated">
+                <div class="button-group">
+                    <input type="button" :value="hasHidden ? 'Show password' : 'Hide password'" @click="hasHidden = !hasHidden">
+                    <input type="button" value="Copy to clipboard" onclick="copyToClipboard()">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -1,4 +1,9 @@
-window.onload = () => {
-    const main = document.querySelector("#main")
-    main.innerHTML = "Hello world, Alex"
-}
+const app = new Vue({
+    el: "#app",
+    data: {
+        test: "Hello world"
+    },
+    computed: {
+        
+    }
+})

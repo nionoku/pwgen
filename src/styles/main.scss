@@ -1,19 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Lato:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400&display=swap');
-
-$background: #f1f6fa;
-$gray-50: #FAFAFA;
-$gray-100: #F5F5F5;
-$gray-200: #EEEEEE;
-$gray-300: #E0E0E0;
-$gray-400: #BDBDBD;
-$gray-500: #9E9E9E;
-$gray-600: #757575;
-$gray-700: #616161;
-$gray-800: #424242;
-$gray-900: #212121;
+@import './fonts';
+@import './colors';
 
 html, body {
     margin: 0;
@@ -24,15 +10,15 @@ html, body {
 
 body {
     background: $background;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
 }
 
 #app {
-    max-width: 660px;
-    padding: 20px;
-    border-radius: 3px;
+    max-width: 670px;
+    padding: 18px;
+    // border-radius: 5px;
     user-select: none;
     
     h1 {
@@ -49,33 +35,33 @@ body {
         width: fill-available;
     }
 
-    // TODO адаптив под разные размеры экрана
     .header {
-        margin: 35px 0;
+        margin: 0 0 35px;
 
         .header-title {
-            font-size: 42px;
+            font-size: 2.5em;
             margin-top: 0;
             // margin-bottom: 20px;
             color: $gray-900;
         }
 
         .header-subtitle {
-            font-size: 24px;
+            font-size: 1.5em;
             color: $gray-800;
             margin: 0;
         }
     }
 
     .content {
+        background: white;
+        border-radius: 3px;
+
         &__card {
-            background: white;
-            border-radius: 3px;
-            padding: 20px 25px 15px;
+            padding: 30px 25px 15px;
         }
 
         &__title {
-            font-size: 20px;
+            font-size: 1.25em;
             font-weight: 300;
             color: $gray-800;
             margin: 0;
@@ -90,7 +76,7 @@ body {
             padding: 9px;
             font-family: 'Roboto';
             font-weight: 400;
-            font-size: 18px;
+            font-size: 1.125em;
             color: $gray-800;
             border: 1px solid $gray-500;
             border-radius: 3px;
@@ -100,7 +86,7 @@ body {
             color: $gray-800;
             font-family: 'Roboto';
             font-weight: 400;
-            font-size: 15px;
+            font-size: 0.9em;
             opacity: 0.7;
             text-transform: uppercase !important;
         }
@@ -116,7 +102,7 @@ body {
                 margin: 0;
                 padding: 0;
                 text-align: center;
-                font-size: 28px;
+                font-size: 1.5em;
                 font-weight: 300;
                 font-family: 'Roboto';
             }
@@ -124,7 +110,7 @@ body {
             .generated-result {
                 margin: 20px 0;
                 text-align: center;
-                font-size: 24px;
+                font-size: 1.5em;
                 font-weight: 400;
                 font-family: 'Roboto Mono';
                 border: 0px solid $gray-500;
@@ -148,10 +134,35 @@ body {
         .links {
             display: flex;
             justify-content: flex-end;
+            // display: none;
+        }
+    }
+}
 
-            .gray-logo {
-                filter: sepia(70%);
+@media screen and (max-width: 720px) {
+    body {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    body {
+        font-size: 12px;
+    }
+
+    #app {
+        .content {
+            &__card {
+                padding: 20px 25px 10px;
             }
         }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    body {
+        font-size: 11px;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 }

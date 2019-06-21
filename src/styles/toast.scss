@@ -1,0 +1,46 @@
+@import './colors';
+
+.toast {
+    visibility: hidden;
+    min-width: 150px;
+    margin-left: calc(-75px - 14px); // min-width / 2
+    background-color: $gray-900;
+    color: white;
+    text-align: center;
+    border-radius: 100px;
+    padding: 12px 14px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 1.2em;
+}
+
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+  
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@media screen and (min-width: 320px) {
+    .toast {
+        min-width: 180px;
+        margin-left: calc(-80px - 14px); // min-width / 2
+    }
+}
+
+@media screen and (min-width: 720px) {
+    .toast {
+        min-width: 250px;
+        margin-left: calc(-125px - 14px); // min-width / 2
+    }
+}

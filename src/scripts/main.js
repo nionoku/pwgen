@@ -17,6 +17,11 @@ const app = new Vue({
     }
 })
 
+function copyToClipboard() {
+    // TODO реализовать функцию копирования в буфер обмена
+    showToast('Copied!');
+}
+
 function showToast(message) {
     const toast = document.querySelector('.toast')
     toast.innerHTML = message
@@ -26,9 +31,4 @@ function showToast(message) {
         toast.className = toast.className.replace(' show', '')
         toast.innerHTML = ''
     }, 2800)
-}
-
-function copyToClipboard() {
-    // TODO реализовать функцию копирования в буфер обмена
-    // console.log('Copied!')
 }

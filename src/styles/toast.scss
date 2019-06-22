@@ -1,19 +1,19 @@
 @import './colors';
 
+$bottom-offset: 5vw;
+
 .toast {
     visibility: hidden;
-    min-width: 150px;
-    margin-left: calc(-75px - 14px); // min-width / 2
-    background-color: $gray-900;
+    background-color: $gray-900-transparent;
     color: white;
     text-align: center;
-    border-radius: 100px;
-    padding: 12px 14px;
+    border-radius: 50px;
+    padding: 10px 14px;
     position: fixed;
     z-index: 1;
     left: 50%;
-    bottom: 30px;
-    font-size: 1.2em;
+    bottom: $bottom-offset;
+    font-size: 1em;
 }
 
 .toast.show {
@@ -23,24 +23,26 @@
 
 @keyframes fadein {
     from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    to {bottom: $bottom-offset; opacity: 1;}
 }
   
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
+    from {bottom: $bottom-offset; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
 
-@media screen and (min-width: 320px) {
+// extra small
+@media screen {
     .toast {
-        min-width: 180px;
-        margin-left: calc(-80px - 14px); // min-width / 2
+        min-width: 80px;
+        margin-left: calc(-40px - 14px); // min-width / 2
     }
 }
 
-@media screen and (min-width: 720px) {
+// small
+@media screen and (min-width: 576px) {
     .toast {
-        min-width: 250px;
-        margin-left: calc(-125px - 14px); // min-width / 2
+        min-width: 90px;
+        margin-left: calc(-45px - 14px); // min-width / 2
     }
 }

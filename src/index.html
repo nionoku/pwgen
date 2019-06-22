@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="js/lib/MD5.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/string-decorator.js"></script>
+    <script src="js/password-generator.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>Generate password on fly! Simple password generator</title>
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" class="container">
         <div class="header">
             <h1 class="header-title">Simple password generator</h1>
             <h2 class="header-subtitle">
@@ -20,45 +23,43 @@
             </h2>
         </div>
         <div class="content">
-            <div class="content__card address">
-                <h2 class="content__title address-title">
-                    <span class="address-title__index">1.</span> Enter web-site address
+            <div class="content-card">
+                <h2 class="content-card__title">
+                    <span class="item-index">1.</span> Enter web-site address
                 </h2>
-                <input class="input fill-available-width address-input" type="text" v-model="address" @input="generatePassword"
+                <input id="address" class="content-card__input fill-available-width" type="text" v-model="address" @input="generatePassword"
                     placeholder="Enter web-site address here">
             </div>
-            <div class="content__card login">
-                <h2 class="content__title login-title">
-                    <span class="login-title__index">2.</span> Enter your login
+            <div class="content-card">
+                <h2 class="content-card__title">
+                    <span class="item-index">2.</span> Enter your login
                 </h2>
-                <input class="input fill-available-width login-input" type="text" v-model="login" @input="generatePassword"
+                <input id="login" class="content-card__input fill-available-width" type="text" v-model="login" @input="generatePassword"
                     placeholder="Enter your login here">
             </div>
-            <div class="content__card salt">
-                <h2 class="content__title salt-title">
-                    <span class="salt-title__index">3.</span> Enter your secret phrase
+            <div class="content-card">
+                <h2 class="content-card__title">
+                    <span class="item-index">3.</span> Enter your secret phrase
                 </h2>
-                <input class="input fill-available-width salt-input" type="text" v-model="salt" @input="generatePassword"
+                <input id="salt" class="content-card__input fill-available-width" type="text" v-model="salt" @input="generatePassword"
                     placeholder="Enter your secret phrase here">
             </div>
-            <div class="content__card generated">
-                <h2 class="generated-title">Your generated password</h2>
-                <input class="generated-result fill-available-width" :type="hasHidden ? 'password' : 'text'" disabled v-model="generated">
-                <div class="button-group">
+            <div class="content-card">
+                <h2 id="generated-label">Your generated password</h2>
+                <input id="generated-result" class="generated-result fill-available-width" :type="hasHidden ? 'password' : 'text'" disabled v-model="generated">
+                <div class="float-right-button-group">
                     <input type="button" :value="hasHidden ? 'Show password' : 'Hide password'" @click="hasHidden = !hasHidden">
-                    <input type="button" value="Copy to clipboard" onclick="copyToClipboard()">
+                    <input type="button" value="Copy to clipboard" @click="copyToClipboard">
                 </div>
             </div>
-            <div class="content__card links">
-                <!-- Github logo -->
+            <div class="content-card card-links">
                 <a href="https://github.com" target="_blank"><img src="assets/github-logo.png" height="28" alt="Github Repository"></a>
             </div>
         </div>
 
-        <div class="toast"></div>
+        <div id="copied-notification" class="toast"></div>
     </div>
 
     <script src="js/main.js"></script>
 </body>
-
 </html>

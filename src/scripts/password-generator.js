@@ -1,3 +1,5 @@
+'use strict'
+
 const MD5 = require('./lib/MD5')
 
 class PasswordGenerator {

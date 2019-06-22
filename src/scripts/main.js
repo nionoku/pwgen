@@ -1,3 +1,5 @@
+'use strict'
+
 const app = new Vue({
     el: '#app',
     data() {
@@ -13,22 +15,16 @@ const app = new Vue({
         generatePassword() {
             // TODO реализовать функцию генерирования пароля
             // this.generated = [this.address, this.login, this.salt].join(':')
+        },
+
+        copyToClipboard() {
+            // TODO реализовать функцию копирования в буфер обмена
+            showToast('Copied!');
         }
     }
 })
 
-function copyToClipboard() {
-    // TODO реализовать функцию копирования в буфер обмена
-    showToast('Copied!');
-}
-
 function showToast(message) {
-    const toast = document.querySelector('.toast')
-    toast.innerHTML = message
-    toast.className = toast.className + ' show'
-    
-    setTimeout(() => {
-        toast.className = toast.className.replace(' show', '')
-        toast.innerHTML = ''
-    }, 2800)
+    const copiedToast = new Toast('#copied-notification')
+    copiedToast.show(message)
 }

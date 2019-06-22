@@ -1,8 +1,14 @@
 'use strict'
 
 class Toast {
-    constructor(id) {
-        this.toast = document.querySelector(`${id}.toast`)
+    constructor({ context, id }) {
+        if (context == null)
+            throw Error('context is undefined')
+
+        if (id == null)
+            throw Error('id is required param')
+
+        this.toast = context.querySelector(`${id}.toast`)
     }
 
     show(message) {

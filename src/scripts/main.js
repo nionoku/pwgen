@@ -25,6 +25,6 @@ const app = new Vue({
 })
 
 function showToast(message) {
-    const copiedToast = new Toast('#copied-notification')
+    const copiedToast = new Toast({ context: document, id: '#copied-notification' })
     copiedToast.show(message)
 }

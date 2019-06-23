@@ -12,13 +12,23 @@ class Toast {
     }
 
     show(message) {
-        this.toast.innerHTML = message
-        this.toast.className = this.toast.className + ' show'
+        if (!this.isShow) {
+            this.isShow = true
 
-        this.hideActionTimeout = setTimeout(() => {
-            this.toast.className = this.toast.className.replace(' show', '')
-            this.toast.innerHTML = ''
-        }, 2800)
+            this.toast.innerHTML = message
+            this.toast.classList.add('show')
+
+            setTimeout(() => {
+                this.hide()
+
+                this.isShow = false
+            }, 2800)
+        }
+    }
+
+    hide() {
+        this.toast.classList.remove('show')
+        this.toast.innerHTML = ''
     }
 }
 

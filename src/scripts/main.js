@@ -20,12 +20,13 @@ const app = new Vue({
 
         copyToClipboard() {
             // TODO реализовать функцию копирования в буфер обмена
-            showToast('Copied!');
+            showToast('Copied!')
         }
     }
 })
 
+const toast = new Toast({ context: document, id: '#copied-notification' })
+
 function showToast(message) {
-    const copiedToast = new Toast({ context: document, id: '#copied-notification' })
-    copiedToast.show(message)
+    toast.show(message)
 }

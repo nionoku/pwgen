@@ -1,5 +1,8 @@
 'use strict'
 
+// const md5 = require('./lib/md5')
+// const StringDecorator = require('./string-decorator')
+
 class PasswordGenerator {
     constructor(passwordLength, ...baseStrings) {
         this.passwordLength = passwordLength;
@@ -15,7 +18,7 @@ class PasswordGenerator {
         const stringDecorator = new StringDecorator(shortenHash.substr(1))
 
         const hashWithDecoration = stringDecorator
-            .firstWordToUpperCase()
+            .lastLetterToUpperCase()
             .appendSpecialCharacter()
             .result()
         return hashWithDecoration

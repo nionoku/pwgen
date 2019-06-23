@@ -16,13 +16,13 @@ class StringDecorator {
     /**
      * Метод заменяет последнюю букву в строке на прописную версию
      */
-    lastWordToUpperCase() {
-        const lastWord = this.initial.match(/[a-z]/g)
-        const lastWordIndex = this.initial.lastIndexOf(lastWord[lastWord.length - 1])
+    lastLetterToUpperCase() {
+        const lastLetter = this.initial.match(/[a-z]/g)
+        const lastLetterIndex = this.initial.lastIndexOf(lastLetter[lastLetter.length - 1])
 
-        this.initial = this.initial.substring(0, lastWordIndex) 
-            + this.initial.substr(lastWordIndex, 1).toUpperCase() 
-            + this.initial.substr(lastWordIndex + 1)
+        this.initial = this.initial.substring(0, lastLetterIndex) 
+            + this.initial.substr(lastLetterIndex, 1).toUpperCase() 
+            + this.initial.substr(lastLetterIndex + 1)
 
         return this
     }

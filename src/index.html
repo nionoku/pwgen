@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="js/lib/clipboard.js"></script>
     <script src="js/lib/MD5.js"></script>
     <script src="js/lib/toast.js"></script>
     <script src="js/string-decorator.js"></script>
@@ -58,7 +59,7 @@
             <div class="content-card">
                 <h2 id="generated-label">Your generated password</h2>
                 <input id="generated-result" class="generated-result fill-available-width" autocomplete="off"
-                    :type="hasPasswordHidden ? 'password' : 'text'" disabled v-model="generated">
+                    :type="hasPasswordHidden ? 'password' : 'text'" readonly v-model="generated">
                 <div class="float-right-button-group grid-container">
                     <button
                         @click="hasPasswordHidden = !hasPasswordHidden">{{ hasPasswordHidden ? 'Show password' : 'Hide password' }}</button>

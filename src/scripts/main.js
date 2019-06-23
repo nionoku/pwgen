@@ -7,19 +7,28 @@ const app = new Vue({
             address: '',
             login: '',
             salt: '',
-            generated: 'GGG',
+            generated: '',
             hasSecretHidden: true,
             hasPasswordHidden: true
         }
     },
+    computed: {
+        generated: function() {
+            return this.generated
+        }
+    },
     methods: {
         generatePassword() {
-            // TODO реализовать функцию генерирования пароля
-            // this.generated = [this.address, this.login, this.salt].join(':')
+            if (this.address.length + this.login.length + this.salt.length > 0) {
+                const pwgen = new PasswordGenerator(12, this.address, this.login, this.salt)
+                this.generated = pwgen.generate()
+            } else {
+                this.generated = ''
+            }
         },
 
         copyToClipboard() {
-            // TODO реализовать функцию копирования в буфер обмена
+            clipboard.writeText(this.generated)
             showToast('Copied!')
         }
     }

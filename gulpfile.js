@@ -3,30 +3,33 @@ const gulp = require('gulp'),
     prefixer = require('gulp-autoprefixer'),
     bs = require('browser-sync').create()
 
+const srcDir = "src", 
+    distDir = "dist";
+
 const paths = {
     assets: {
-        src: "src/assets/**/*.*",
-        dest: "dist/assets"
+        src: `${srcDir}/assets/**/*.*`,
+        dest: `${distDir}/assets`
     },
 
     styles: {
-        src: "src/styles/**/*.scss",
-        dest: "dist/css"
+        src: `${srcDir}/styles/**/*.scss`,
+        dest: `${distDir}/css`
     },
 
     scripts: {
-        src: "src/scripts/**/*.js",
-        dest: "dist/js"
+        src: `${srcDir}/scripts/**/*.js`,
+        dest: `${distDir}/js`
     },
 
     pages: {
-        src: "src/pages/*.html",
-        dest: "dist/pages"
+        src: `${srcDir}/pages/*.html`,
+        dest: `${distDir}/pages`
     },
 
     index: {
-        src: "src/*.html",
-        dest: "dist"
+        src: `${srcDir}/*.html`,
+        dest: `${distDir}`
     }
 }
 
@@ -84,7 +87,7 @@ function reloadServer(done) {
 function serve(done) {
     bs.init({
         server: {
-            baseDir: "dist"
+            baseDir: distDir
         }
     })
 

@@ -1,7 +1,5 @@
 'use strict'
 
-const MD5 = require('./lib/MD5')
-
 class PasswordGenerator {
     constructor(passwordLength, ...baseStrings) {
         this.passwordLength = passwordLength;
@@ -13,7 +11,14 @@ class PasswordGenerator {
     generate() {
         const mixOfString = this.stringFromCharDecompos(this.baseStrings)
         const stringHashingResult = this.getStringHashing(mixOfString)
-        return this.shortenString(stringHashingResult)
+        const shortenHash = this.shortenString(stringHashingResult)
+        const stringDecorator = new StringDecorator(shortenHash.substr(1))
+
+        const hashWithDecoration = stringDecorator
+            .firstWordToUpperCase()
+            .appendSpecialCharacter()
+            .result()
+        return hashWithDecoration
     }
 
     /**
@@ -36,7 +41,7 @@ class PasswordGenerator {
      * @param {string} stringForHashing хэшируемая строка
      */
     getStringHashing(stringForHashing) {
-        return MD5(stringForHashing);
+        return md5(stringForHashing);
     }
 
     /**

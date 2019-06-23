@@ -1,6 +1,6 @@
 {
-  "name": "password-generator",
-  "version": "0.0.1",
+  "name": "pwgen",
+  "version": "1.0.0",
   "description": "Simple password generator",
   "author": "nionoku <nionoku@gmail.com>",
   "scripts": {

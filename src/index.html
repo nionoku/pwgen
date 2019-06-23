@@ -10,11 +10,12 @@
     <script src="js/lib/toast.js"></script>
     <script src="js/string-decorator.js"></script>
     <script src="js/password-generator.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <title>Generate password on fly! Simple password generator</title>
 </head>
 
-<body>
+<body class="grid-container">
     <div id="app" class="container">
         <div class="header">
             <h1 class="header-title">Simple password generator</h1>
@@ -22,38 +23,51 @@
                 Create your password on the fly using the website address, your login and secret phrase!
             </h2>
         </div>
-        <div class="content">
+        <div class="content grid-container">
             <div class="content-card">
                 <h2 class="content-card__title">
                     <span class="item-index">1.</span> Enter web-site address
                 </h2>
-                <input id="address" class="content-card__input fill-available-width" type="text" v-model="address" @input="generatePassword"
-                    placeholder="Enter web-site address here">
+                <div class="content-card__input-container">
+                    <input id="address" class="content-input fill-available-width" type="text" autocomplete="on"
+                        v-model="address" @input="generatePassword" placeholder="Enter web-site address here">
+                </div>
             </div>
             <div class="content-card">
                 <h2 class="content-card__title">
                     <span class="item-index">2.</span> Enter your login
                 </h2>
-                <input id="login" class="content-card__input fill-available-width" type="text" v-model="login" @input="generatePassword"
-                    placeholder="Enter your login here">
+                <div class="content-card__input-container">
+                    <input id="login" class="content-input fill-available-width" type="text" autocomplete="on"
+                        v-model="login" @input="generatePassword" placeholder="Enter your login here">
+                </div>
             </div>
             <div class="content-card">
                 <h2 class="content-card__title">
                     <span class="item-index">3.</span> Enter your secret phrase
                 </h2>
-                <input id="salt" class="content-card__input fill-available-width" type="text" v-model="salt" @input="generatePassword"
-                    placeholder="Enter your secret phrase here">
+                <div class="content-card__input-container grid-container salt-grid-container">
+                    <input id="salt" class="content-input fill-available-width"
+                        :type="hasSecretHidden ? 'password' : 'text'" autocomplete="off" v-model="salt"
+                        @input="generatePassword" placeholder="Enter your secret phrase here">
+
+                    <button @click="hasSecretHidden = !hasSecretHidden"><i
+                            class="material-icons icon-button">{{ hasSecretHidden ? 'visibility' : 'visibility_off' }}</i></button>
+                </div>
             </div>
             <div class="content-card">
                 <h2 id="generated-label">Your generated password</h2>
-                <input id="generated-result" class="generated-result fill-available-width" :type="hasHidden ? 'password' : 'text'" disabled v-model="generated">
-                <div class="float-right-button-group">
-                    <input type="button" :value="hasHidden ? 'Show password' : 'Hide password'" @click="hasHidden = !hasHidden">
-                    <input type="button" value="Copy to clipboard" @click="copyToClipboard">
+                <input id="generated-result" class="generated-result fill-available-width" autocomplete="off"
+                    :type="hasPasswordHidden ? 'password' : 'text'" disabled v-model="generated">
+                <div class="float-right-button-group grid-container">
+                    <button
+                        @click="hasPasswordHidden = !hasPasswordHidden">{{ hasPasswordHidden ? 'Show password' : 'Hide password' }}</button>
+                    <button @click="copyToClipboard">Copy to clipboard</button>
                 </div>
             </div>
             <div class="content-card card-links">
-                <a href="https://github.com" target="_blank"><img src="assets/github-logo.png" height="28" alt="Github Repository"></a>
+                <a href="https://github.com/nionoku/password-generator" target="_blank"><img
+                        src="assets/github-logo.png" height="28" alt="Github Repository"></a>
             </div>
         </div>
 
@@ -62,4 +76,5 @@
 
     <script src="js/main.js"></script>
 </body>
+
 </html>

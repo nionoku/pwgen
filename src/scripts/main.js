@@ -8,7 +8,8 @@ const app = new Vue({
             login: '',
             salt: '',
             generated: 'GGG',
-            hasHidden: true
+            hasSecretHidden: true,
+            hasPasswordHidden: true
         }
     },
     methods: {

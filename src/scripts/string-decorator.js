@@ -14,15 +14,15 @@ class StringDecorator {
     }
 
     /**
-     * Метод заменяет первую букву в строке на прописную версию
+     * Метод заменяет последнюю букву в строке на прописную версию
      */
-    firstWordToUpperCase() {
-        const firstWord = this.initial.substr(1, this.initial.length - 2).match(/[a-z]/)
-        const firstWordIndex = this.initial.indexOf(firstWord)
+    lastWordToUpperCase() {
+        const lastWord = this.initial.match(/[a-z]/g)
+        const lastWordIndex = this.initial.lastIndexOf(lastWord[lastWord.length - 1])
 
-        this.initial = this.initial.substring(0, firstWordIndex) 
-            + this.initial.substr(firstWordIndex, 1).toUpperCase() 
-            + this.initial.substr(firstWordIndex + 1)
+        this.initial = this.initial.substring(0, lastWordIndex) 
+            + this.initial.substr(lastWordIndex, 1).toUpperCase() 
+            + this.initial.substr(lastWordIndex + 1)
 
         return this
     }

@@ -102,7 +102,7 @@ describe("PasswordGenerator testing", () => {
             const passwordGenerator = new PasswordGenerator(8, site, username, salt)
             const pass = passwordGenerator.generate()
 
-            Chai.assert.equal(pass, "1bc7f808")
+            Chai.assert.equal(pass, "!bc7F808")
             done()
         })
     })

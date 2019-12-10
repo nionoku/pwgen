@@ -24,7 +24,7 @@ body {
 #app {
     padding: 18px;
     user-select: none;
-    
+
     h1 {
         font-family: 'Roboto Slab';
         font-weight: 700;
@@ -67,7 +67,7 @@ body {
                 font-weight: 300;
                 color: $gray-800;
                 margin: 0;
-    
+
                 .item-index {
                     color: $gray-600;
                 }
@@ -84,7 +84,7 @@ body {
                     color: $gray-900;
                     border: 1px solid $gray-500;
                     border-radius: 3px;
-        
+
                     &::placeholder {
                         color: $gray-800;
                         font-family: 'Roboto';
@@ -93,6 +93,10 @@ body {
                         opacity: 0.6;
                         text-transform: uppercase;
                     }
+                }
+
+                button {
+                  display: flex;
                 }
             }
 

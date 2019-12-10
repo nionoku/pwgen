@@ -1,8 +1,5 @@
 'use strict'
 
-// const md5 = require('./lib/md5')
-// const StringDecorator = require('./string-decorator')
-
 class PasswordGenerator {
     constructor(passwordLength, ...baseStrings) {
         this.passwordLength = passwordLength;
@@ -56,7 +53,7 @@ class PasswordGenerator {
 
         for (let j = 0; j < this.getMaxLengthOfStrings(...this.baseStrings); j++) {
             for (let i = 0; i < this.baseStrings.length; i++) {
-                stringFromCharDecompose += (this.baseStrings[i][j] != null) 
+                stringFromCharDecompose += (this.baseStrings[i][j] != null)
                     ? this.baseStrings[i][j]
                     : ''
             }
@@ -73,7 +70,7 @@ class PasswordGenerator {
     }
 
     /**
-     * Метод возвращает массивы символов каждой входной строки 
+     * Метод возвращает массивы символов каждой входной строки
      */
     getArrayOfSplitStrings() {
         return this.baseStrings

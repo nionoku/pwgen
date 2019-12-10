@@ -3,7 +3,7 @@
   "short_name": "pwgen",
   "description": "Create your password on the fly using the website address, your login and secret phrase!",
   "lang": "en",
-  "start_url": "/pwgen",
+  "start_url": "https://nionoku.github.io/pwgen/",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [

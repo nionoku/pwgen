@@ -67,19 +67,21 @@
         </h2>
         <div class="content-card__input-container grid-container salt-grid-container">
           <input id="salt" class="content-input fill-available-width" :type="hasSecretHidden ? 'password' : 'text'"
-            autocomplete="off" v-model="salt" @input="generatePassword" placeholder="Enter your secret phrase here" aria-label="secret" name="secret">
+            autocomplete="off" v-model="salt" @input="generatePassword" placeholder="Enter your secret phrase here"
+            aria-label="secret" name="secret">
 
-          <button @click="hasSecretHidden = !hasSecretHidden"><i
-              class="material-icons icon-button" v-text="hasSecretHidden ? 'visibility' : 'visibility_off'"></i></button>
+          <button @click="hasSecretHidden = !hasSecretHidden"><i class="material-icons icon-button"
+              v-text="hasSecretHidden ? 'visibility' : 'visibility_off'"></i></button>
         </div>
       </div>
       <div class="content-card">
         <h2 id="generated-label">Your generated password</h2>
         <input id="generated-result" class="generated-result fill-available-width" autocomplete="off"
-          :type="hasPasswordHidden ? 'password' : 'text'" readonly v-model="generated" aria-label="generated" name="generated">
+          :type="hasPasswordHidden ? 'password' : 'text'" readonly v-model="generated" aria-label="generated"
+          name="generated">
         <div class="float-right-button-group grid-container">
-          <button
-            @click="hasPasswordHidden = !hasPasswordHidden" v-text="hasPasswordHidden ? 'Show password' : 'Hide password'">Show password</button>
+          <button @click="hasPasswordHidden = !hasPasswordHidden"
+            v-text="hasPasswordHidden ? 'Show password' : 'Hide password'">Show password</button>
           <button @click="copyToClipboard">Copy to clipboard</button>
         </div>
       </div>
@@ -92,6 +94,19 @@
     <div id="copied-notification" class="toast"></div>
   </div>
 
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('js/sw.js').then(
+          function (registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          },
+          function (err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
   <script src="js/main.js"></script>
 </body>
 

@@ -3,7 +3,7 @@ const gulp = require('gulp'),
     prefixer = require('gulp-autoprefixer'),
     bs = require('browser-sync').create()
 
-const srcDir = "src", 
+const srcDir = "src",
     distDir = "dist";
 
 const paths = {
@@ -28,7 +28,7 @@ const paths = {
     },
 
     index: {
-        src: `${srcDir}/*.html`,
+        src: `${srcDir}/*`,
         dest: `${distDir}`
     }
 }

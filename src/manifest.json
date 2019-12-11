@@ -3,7 +3,7 @@
   "short_name": "pwgen",
   "description": "Create your password on the fly using the website address, your login and secret phrase!",
   "lang": "en",
-  "start_url": "",
+  "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [

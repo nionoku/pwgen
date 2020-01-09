@@ -1,14 +1,18 @@
 <template>
-  <div class="toast" />
+  <div
+    ref="toast"
+    class="toast"
+    :class="{ show: isShow }"
+  />
 </template>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/_colors';
+@import "@/assets/scss/_colors";
 
 $bottom-offset: 5vh;
 
 .toast {
-  visibility: hidden;
+  // visibility: hidden;
   background-color: $gray-900-transparent;
   color: white;
   text-align: center;
@@ -22,7 +26,7 @@ $bottom-offset: 5vh;
 }
 
 .toast.show {
-  visibility: visible;
+  // visibility: visible;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
@@ -76,6 +80,28 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Toast extends Vue {
+  private _isShow: boolean = false;
 
+  public show (text: string) {
+    const toast = (this.$refs['toast'] as HTMLDivElement);
+    toast.innerHTML = text;
+
+    this._isShow = true;
+
+    setTimeout(() => {
+      this.hide();
+    }, 2800);
+  }
+
+  public hide () {
+    this._isShow = false;
+
+    const toast = (this.$refs['toast'] as HTMLDivElement);
+    toast.innerHTML = '';
+  }
+
+  public get isShow(): boolean {
+    return this._isShow;
+  }
 }
 </script>

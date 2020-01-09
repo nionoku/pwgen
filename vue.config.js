@@ -1,55 +1,68 @@
 module.exports = {
   publicPath: '',
+
   pwa: {
     name: 'pwgen',
-    short_name: 'pwgen',
-    description: 'Create your password on the fly using the website address, your login and secret phrase!',
-    lang: 'en',
-    start_url: './index.html',
-    display: 'standalone',
-    orientation: 'portrait',
     themeColor: '#3C3C3C',
-    msTileColor: '#F5F5F5',
+    msTitleColor: '#F5F5F5',
+    appleMobileWebAppCapable: 'no',
+    appleMobileWebAppStatusBarStyle: 'default',
     manifestOptions: {
-      background_color: '#F3F3F3'
+      description: 'Create your password on the fly using the website address, your login and secret phrase!',
+      start_url: 'index.html',
+      display: 'standalone',
+      orientation: 'portrait',
+      background_color: '#F5F5F5',
+      splash_pages: null,
+      icons: [
+        {
+          src: 'img/icons/icon-72x72.png',
+          sizes: '72x72',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-96x96.png',
+          sizes: '96x96',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-128x128.png',
+          sizes: '128x128',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-144x144.png',
+          sizes: '144x144',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-152x152.png',
+          sizes: '152x152',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-384x384.png',
+          sizes: '384x384',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
     },
-    icons: [
-      {
-        src: 'assets/icons/android-icon-36x36.png',
-        sizes: '36x36',
-        type: 'image/png',
-        density: '0.75'
-      },
-      {
-        src: 'assets/icons/android-icon-48x48.png',
-        sizes: '48x48',
-        type: 'image/png',
-        density: '1.0'
-      },
-      {
-        src: 'assets/icons/android-icon-72x72.png',
-        sizes: '72x72',
-        type: 'image/png',
-        density: '1.5'
-      },
-      {
-        src: 'assets/icons/android-icon-96x96.png',
-        sizes: '96x96',
-        type: 'image/png',
-        density: '2.0'
-      },
-      {
-        src: 'assets/icons/android-icon-144x144.png',
-        sizes: '144x144',
-        type: 'image/png',
-        density: '3.0'
-      },
-      {
-        src: 'assets/icons/android-icon-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-        density: '4.0'
-      }
-    ]
+    iconPaths: {
+      favicon32: 'img/icons/icon-72x72.png',
+      favicon16: 'img/icons/icon-72x72.png',
+      appleTouchIcon: 'img/icons/icon-192x192.png',
+      maskIcon: 'img/icons/icon-384x384.png',
+      msTileImage: 'img/icons/icon-144x144.png'
+    }
   }
 };

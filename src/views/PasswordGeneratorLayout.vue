@@ -297,11 +297,7 @@ export default class PasswordGeneratorLayout extends Vue {
     return Number(process.env.VUE_APP_PASSWORD_LENGTH);
   }
 
-  // @ts-ignore
-  public onSuccessCopied ({ value }) {
-
-    // eslint-disable-next-line no-console
-    console.log(value);
+  public onSuccessCopied () {
     this.showToast();
   }
 

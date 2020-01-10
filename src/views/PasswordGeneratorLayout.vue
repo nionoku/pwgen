@@ -11,10 +11,16 @@
     <section class="content">
       <div class="field">
         <h3 class="field__title">
-          <span class="gray-600">1.</span> Enter web-site address
+          <span class="gray-600">1.</span> Enter website address
         </h3>
         <div class="field__input">
-          <input>
+          <input
+            name="website"
+            aria-label="website"
+            type="text"
+            autocomplete="on"
+            placeholder="Enter website address here"
+          >
         </div>
       </div>
       <div class="field">
@@ -22,7 +28,13 @@
           <span class="gray-600">2.</span> Enter your login
         </h3>
         <div class="field__input">
-          <input>
+          <input
+            name="username"
+            aria-label="username"
+            type="text"
+            autocomplete="on"
+            placeholder="Enter your login here"
+          >
         </div>
       </div>
       <div class="field">
@@ -30,26 +42,40 @@
           <span class="gray-600">3.</span> Enter your secret phrase
         </h3>
         <div class="field__input">
-          <input>
+          <input
+            name="secret"
+            aria-label="secret"
+            type="password"
+            autocomplete="new-password"
+            placeholder="Enter your secret phrase here"
+          >
           <div class="space" />
-          <button>
+          <button class="px-7 py-5">
             <i class="mdi mdi-24px mdi-eye" />
           </button>
         </div>
       </div>
       <div class="field">
-        <h3 class="field__title text-center">
+        <h3 class="field__title text-center large-title">
           Your generated password
         </h3>
       </div>
       <div class="field__input">
-        <input>
+        <input
+          name="generated"
+          class="generated"
+          readonly
+        >
       </div>
       <div class="field">
         <div class="field__input flex-container row-flex-end">
-          <button>Show password</button>
+          <button class="px-7 py-5">
+            Show password
+          </button>
           <div class="space" />
-          <button>Copy to clipboard</button>
+          <button class="px-7 py-5">
+            Copy to clipboard
+          </button>
         </div>
       </div>
     </section>
@@ -73,6 +99,7 @@
 </template>
 
 <style lang="scss">
+@import "@/assets/scss/_colors";
 @import "@/assets/scss/_sizes";
 
 .container {
@@ -100,7 +127,7 @@ header {
 }
 
 .content {
-  padding: $size-20 $size-25;
+  padding: $size-20 $size-15;
   background-color: white;
 }
 
@@ -115,8 +142,13 @@ header {
 
   &__title {
     font-size: 1.15em;
-    font-family: "Lato";
-    font-weight: 400;
+    font-family: "Roboto";
+    font-weight: 300;
+    letter-spacing: $size-1;
+  }
+
+  &__title.large-title {
+    font-size: 1.5em;
   }
 
   &__input {
@@ -124,8 +156,29 @@ header {
     margin: $size-15 $size-10 $size-5;
 
     input {
+      font-size: 1.125em;
       flex: 1;
-      padding: $size-8 $size-10;
+      padding: $size-12 $size-10;
+      border: $size-1 solid $gray-500;
+      border-radius: $size-3;
+      text-transform: lowercase;
+
+      &::placeholder {
+        font-size: 0.8em;
+        text-transform: uppercase;
+        letter-spacing: $size-1;
+      }
+    }
+
+    input.generated {
+      border: none;
+      text-align: center;
+      text-transform: none;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
     }
   }
 }
@@ -135,12 +188,18 @@ header {
   justify-content: flex-end;
 }
 
-footer {
-  // margin: 0 $size-15 $size-5;
-}
-
 .space {
   width: $size-15;
+}
+
+.px-7 {
+  padding-left: $size-7;
+  padding-right: $size-7;
+}
+
+.py-5 {
+  padding-top: $size-5;
+  padding-bottom: $size-5;
 }
 
 // extra small
@@ -175,8 +234,6 @@ footer {
   }
 }
 </style>
-<style lang="scss" scoped>
-</style>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -196,7 +253,7 @@ export default class PasswordGeneratorLayout extends Vue {
     (this.$refs[ 'bottomToast' ] as Toast).show('text');
   }
 
-  public get homepage() {
+  public get homepage () {
     return process.env.VUE_APP_GIT_HOMEPAGE;
   }
 }

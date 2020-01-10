@@ -1,4 +1,4 @@
-name: pwgen deploy
+name: deploy on github pages
 on:
   push:
     branches: master
@@ -16,7 +16,7 @@ jobs:
 
       - run: pwd && ls -la
 
-      - run: npm i --production
+      - run: npm i
 
       - run: npm run build
 

@@ -1,21 +1,50 @@
 {
   "name": "pwgen",
-  "version": "1.0.0",
-  "description": "Simple password generator",
-  "author": "nionoku <nionoku@gmail.com>",
+  "version": "2.0.0",
   "scripts": {
-    "serve": "gulp serve",
-    "build": "gulp build",
-    "test": "mocha tests/**/*.js"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "homepage": "https://github.com/nionoku/password-generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nionoku/password-generator"
   },
   "dependencies": {
-    "browser-sync": "^2.26.5",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-sass": "^4.0.2"
+    "@mdi/font": "^4.7.95",
+    "core-js": "^3.4.4",
+    "md5": "^2.2.1",
+    "reflect-metadata": "^0.1.13",
+    "register-service-worker": "^1.6.2",
+    "typedi": "^0.8.0",
+    "typeface-lato": "0.0.75",
+    "typeface-roboto": "0.0.75",
+    "typeface-roboto-slab": "^1.1.3",
+    "v-clipboard": "^2.2.2",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-property-decorator": "^8.3.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4"
-  }
+    "@types/md5": "^2.1.33",
+    "@types/node": "^13.1.6",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-plugin-pwa": "^4.1.0",
+    "@vue/cli-plugin-typescript": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/eslint-config-typescript": "^4.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "typescript": "~3.5.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }

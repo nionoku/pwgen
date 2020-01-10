@@ -1,21 +1,24 @@
-# Simple password generator
+# pwgen
 
-Simple password generator using only JS
+## Project setup
+```
+npm install
+```
 
 ### Compiles and hot-reloads for development
-
 ```
 npm run serve
 ```
 
-### Compiles for production
+### Compiles and minifies for production
+```
+npm run build
+```
 
+### Lints and fixes files
 ```
-npm build
+npm run lint
 ```
 
-### Run your tests
-
-```
-npm run test
-```
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

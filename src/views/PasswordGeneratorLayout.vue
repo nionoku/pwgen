@@ -15,11 +15,14 @@
         </h3>
         <div class="field__input">
           <input
+            id="website"
+            v-model="website"
             name="website"
             aria-label="website"
             type="text"
             autocomplete="on"
             placeholder="Enter website address here"
+            @keyup="onEventGeneratePassword"
           >
         </div>
       </div>
@@ -29,11 +32,14 @@
         </h3>
         <div class="field__input">
           <input
+            id="username"
+            v-model="login"
             name="username"
             aria-label="username"
             type="text"
             autocomplete="on"
             placeholder="Enter your login here"
+            @keyup="onEventGeneratePassword"
           >
         </div>
       </div>
@@ -43,15 +49,24 @@
         </h3>
         <div class="field__input">
           <input
+            id="secret"
+            v-model="secret"
             name="secret"
             aria-label="secret"
-            type="password"
+            :type="secretIsHidden ? 'password' : 'text'"
             autocomplete="new-password"
             placeholder="Enter your secret phrase here"
+            @keyup="onEventGeneratePassword"
           >
           <div class="space" />
-          <button class="px-7 py-5">
-            <i class="mdi mdi-24px mdi-eye" />
+          <button
+            class="px-7 py-5"
+            @click="secretIsHidden = !secretIsHidden"
+          >
+            <i
+              class="mdi mdi-24px"
+              :class="{ 'mdi-eye': secretIsHidden, 'mdi-eye-off': !secretIsHidden }"
+            />
           </button>
         </div>
       </div>
@@ -62,6 +77,8 @@
       </div>
       <div class="field__input">
         <input
+          id="generated"
+          v-model="generated"
           name="generated"
           class="generated"
           readonly
@@ -73,7 +90,10 @@
             Show password
           </button>
           <div class="space" />
-          <button class="px-7 py-5">
+          <button
+            v-clipboard="() => generated"
+            class="px-7 py-5"
+          >
             Copy to clipboard
           </button>
         </div>
@@ -94,6 +114,7 @@
         </a>
       </div>
     </footer>
+
     <!-- <Toast ref="bottomToast" /> -->
   </div>
 </template>
@@ -162,6 +183,7 @@ header {
       border: $size-1 solid $gray-500;
       border-radius: $size-3;
       text-transform: lowercase;
+      color: $gray-800;
 
       &::placeholder {
         font-size: 0.8em;
@@ -238,6 +260,8 @@ header {
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Toast from '@/components/Toast.vue';
+import Container from 'typedi';
+import { PasswordGenerator } from '../managers/PasswordGenerator';
 
 @Component({
   components: {
@@ -245,6 +269,15 @@ import Toast from '@/components/Toast.vue';
   }
 })
 export default class PasswordGeneratorLayout extends Vue {
+  public generator: PasswordGenerator = Container.get(PasswordGenerator)
+
+  public website = '';
+  public login = '';
+  public secret = '';
+  public generated = '';
+
+  public secretIsHidden = true
+
   public mounted () {
     this.showToast();
   }
@@ -255,6 +288,23 @@ export default class PasswordGeneratorLayout extends Vue {
 
   public get homepage () {
     return process.env.VUE_APP_GIT_HOMEPAGE;
+  }
+
+  public get passwordLength () {
+    return Number(process.env.VUE_APP_PASSWORD_LENGTH);
+  }
+
+  public onEventGeneratePassword () {
+    this.generated = this.generatePassword([ this.website, this.login, this.secret ], this.passwordLength);
+  }
+
+  private generatePassword (fields: Array<string>, passwordLength: number): string {
+    // проверяем, что все строки из входного массива валидны
+    if (fields.filter(it => it && it != '').length === fields.length) {
+      return this.generator.generate(fields, passwordLength);
+    } else {
+      return '';
+    }
   }
 }
 </script>

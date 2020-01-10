@@ -7,8 +7,10 @@ import 'typeface-lato';
 import Vue from 'vue';
 import App from '@/views/App.vue';
 import '@/config/registerServiceWorker';
+import Clipboard from 'v-clipboard';
 
 Vue.config.productionTip = false;
+Vue.use(Clipboard);
 
 new Vue({
   render: h => h(App)

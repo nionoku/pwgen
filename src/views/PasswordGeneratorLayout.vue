@@ -79,19 +79,25 @@
         <input
           id="generated"
           v-model="generated"
-          name="generated"
           class="generated"
+          name="generated"
+          :type="generatedIsHidden ? 'password' : 'text'"
           readonly
         >
       </div>
       <div class="field">
         <div class="field__input flex-container row-flex-end">
-          <button class="px-7 py-5">
-            Show password
+          <button
+            class="px-7 py-5"
+            @click="generatedIsHidden = !generatedIsHidden"
+          >
+            {{ `${generatedIsHidden ? 'Show' : 'Hide'} password` }}
           </button>
           <div class="space" />
           <button
             v-clipboard="() => generated"
+            v-clipboard:success="onSuccessCopied"
+            v-clipboard:error="onErrorCopied"
             class="px-7 py-5"
           >
             Copy to clipboard
@@ -115,7 +121,7 @@
       </div>
     </footer>
 
-    <!-- <Toast ref="bottomToast" /> -->
+    <Toast ref="bottomToast" />
   </div>
 </template>
 
@@ -277,13 +283,10 @@ export default class PasswordGeneratorLayout extends Vue {
   public generated = '';
 
   public secretIsHidden = true
-
-  public mounted () {
-    this.showToast();
-  }
+  public generatedIsHidden = true
 
   public showToast () {
-    (this.$refs[ 'bottomToast' ] as Toast).show('text');
+    (this.$refs[ 'bottomToast' ] as Toast).show('Copied!');
   }
 
   public get homepage () {
@@ -292,6 +295,19 @@ export default class PasswordGeneratorLayout extends Vue {
 
   public get passwordLength () {
     return Number(process.env.VUE_APP_PASSWORD_LENGTH);
+  }
+
+  // @ts-ignore
+  public onSuccessCopied ({ value }) {
+
+    // eslint-disable-next-line no-console
+    console.log(value);
+    this.showToast();
+  }
+
+  public onErrorCopied () {
+    // TODO show error alert
+    alert('error');
   }
 
   public onEventGeneratePassword () {

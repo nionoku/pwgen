@@ -2,7 +2,7 @@
   <div
     ref="toast"
     class="toast"
-    :class="{ show: isShow }"
+    :class="{ 'show': isShow }"
   />
 </template>
 
@@ -11,8 +11,13 @@
 
 $bottom-offset: 5vh;
 
+.toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
 .toast {
-  // visibility: hidden;
+  visibility: hidden;
   background-color: $gray-900-transparent;
   color: white;
   text-align: center;
@@ -23,11 +28,6 @@ $bottom-offset: 5vh;
   left: 50%;
   bottom: $bottom-offset;
   font-size: 1em;
-}
-
-.toast.show {
-  // visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 @keyframes fadein {
@@ -80,13 +80,16 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Toast extends Vue {
-  private _isShow: boolean = false;
+  private isShow: boolean = false;
+  private toast!: HTMLDivElement
+
+  public mounted () {
+    this.toast = (this.$refs['toast'] as HTMLDivElement);
+  }
 
   public show (text: string) {
-    const toast = (this.$refs['toast'] as HTMLDivElement);
-    toast.innerHTML = text;
-
-    this._isShow = true;
+    this.toast.innerHTML = text;
+    this.isShow = true;
 
     setTimeout(() => {
       this.hide();
@@ -94,14 +97,8 @@ export default class Toast extends Vue {
   }
 
   public hide () {
-    this._isShow = false;
-
-    const toast = (this.$refs['toast'] as HTMLDivElement);
-    toast.innerHTML = '';
-  }
-
-  public get isShow(): boolean {
-    return this._isShow;
+    this.isShow = false;
+    this.toast.innerHTML = '';
   }
 }
 </script>

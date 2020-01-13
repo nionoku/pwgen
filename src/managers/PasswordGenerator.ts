@@ -1,12 +1,14 @@
 import md5 from 'md5';
 import { Service, Inject } from 'typedi';
+// eslint-disable-next-line no-unused-vars
 import { StringDecorator } from './StringDecorator';
 
-@Service(PasswordGenerator.name)
+@Service()
 export class PasswordGenerator {
-  @Inject(StringDecorator.name)
-  private stringDecorator!: StringDecorator;
-  constructor () { }
+  constructor(
+    // eslint-disable-next-line no-unused-vars
+    @Inject(() => StringDecorator) private stringDecorator: StringDecorator
+  ) {}
 
   /**
    * Метод генерирует пароль на основе входных строк

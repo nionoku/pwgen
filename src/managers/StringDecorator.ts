@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-@Service(StringDecorator.name)
+@Service()
 export class StringDecorator {
   private stringToDecorate: string = '';
 
@@ -10,9 +10,9 @@ export class StringDecorator {
   }
 
   /**
-     * Метод добавляет в начало строки восклицательный знак
-     */
-  appendSpecialCharacter () {
+   * Метод добавляет в начало строки восклицательный знак
+   */
+  public appendSpecialCharacter () {
     this.stringToDecorate = `!${this.stringToDecorate}`;
     return this;
   }
@@ -20,7 +20,7 @@ export class StringDecorator {
   /**
    * Метод заменяет последнюю букву в строке на прописную версию
    */
-  lastLetterToUpperCase () {
+  public lastLetterToUpperCase () {
     const lastLetter = this.stringToDecorate.match(/[a-z]/g);
 
     if (lastLetter) {
@@ -34,7 +34,7 @@ export class StringDecorator {
     return this;
   }
 
-  result () {
+  public result () {
     const tmp = this.stringToDecorate;
     this.stringToDecorate = '';
 

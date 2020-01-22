@@ -19,11 +19,19 @@
             v-model="website"
             name="website"
             aria-label="website"
+            list="websites"
             type="text"
             autocomplete="on"
             placeholder="Enter website address here"
             @keyup="onEventGeneratePassword"
           >
+          <datalist id="websites">
+            <option
+              v-for="(site, index) in sites"
+              :key="index"
+              :value="site"
+            />
+          </datalist>
         </div>
       </div>
       <div class="field">
@@ -135,6 +143,10 @@
   & > :not(:last-child) {
     margin: 0 0 $size-20;
   }
+}
+
+input:-webkit-autofill {
+  background: red;
 }
 
 header {
@@ -264,10 +276,11 @@ header {
 </style>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import Toast from '@/components/Toast.vue';
 import Container from 'typedi';
 import { PasswordGenerator } from '../managers/PasswordGenerator';
+import { ConstantManager } from '@/utils/ConstantManager';
 
 @Component({
   components: {
@@ -282,8 +295,19 @@ export default class PasswordGeneratorLayout extends Vue {
   public secret = '';
   public generated = '';
 
-  public secretIsHidden = true
-  public generatedIsHidden = true
+  public secretIsHidden = true;
+  public generatedIsHidden = true;
+
+  private savedSites: Array<string> = [];
+
+  public mounted () {
+    const loadedSites: string = localStorage.getItem(ConstantManager.SAVED_SITES) || '[]';
+    this.savedSites.push(...JSON.parse(loadedSites));
+
+    window.onbeforeunload = () => {
+      localStorage.setItem(ConstantManager.SAVED_SITES, JSON.stringify(this.savedSites));
+    };
+  }
 
   public showToast () {
     (this.$refs[ 'bottomToast' ] as Toast).show('Copied!');
@@ -293,11 +317,21 @@ export default class PasswordGeneratorLayout extends Vue {
     return process.env.VUE_APP_GIT_HOMEPAGE;
   }
 
-  public get passwordLength () {
+  public get passwordLength (): number {
     return Number(process.env.VUE_APP_PASSWORD_LENGTH);
   }
 
+  public get sites (): Array<string> {
+    return this.savedSites;
+  }
+
+  public saveSite(site: string) {
+    if (!this.sites.includes(site))
+      this.sites.unshift(site);
+  }
+
   public onSuccessCopied () {
+    this.saveSite(this.website);
     this.showToast();
   }
 
@@ -317,6 +351,11 @@ export default class PasswordGeneratorLayout extends Vue {
     } else {
       return '';
     }
+  }
+
+  @Watch('generatedIsHidden')
+  public onGeneratedIsHiddenHasChanged () {
+    this.saveSite(this.website);
   }
 }
 </script>
